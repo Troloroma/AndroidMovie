@@ -14,3 +14,15 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AndroidMovie"
 include ':app'
+include ':domain'
+include ':data'
+include ':features'
+include ':network:network'
+include ':network:utils'
+include ':common'
+include ':core:dagger'
+include ':core:dependency'
+include ':core:navigation'
+include ':core:uiComponent'
+include ':features:popularmovies:domain'
+include ':features:popularmovies:presentation'
