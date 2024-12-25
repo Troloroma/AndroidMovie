@@ -9,12 +9,12 @@ android {
     compileSdk 34
 
     defaultConfig {
-        buildConfigField("String", "HOST_API", "\"https://api.themoviedb.org/\"")
+        buildConfigField("String", "HOST_API", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"274f828ad283bd634ef4fc1ee4af255f\"")
         minSdk 24
         targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
     buildFeatures {
         buildConfig = true
@@ -22,7 +22,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {

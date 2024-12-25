@@ -18,7 +18,6 @@ import java.net.UnknownHostException
 typealias Request<T> = suspend () -> Response<ServerResponse<T>>
 
 open class BaseRepository {
-    @Deprecated("use safeApiSuspendResult")
     protected suspend fun <T : Any> safeApiCall(call: Request<T>): ResponseStatus<T> {
         return safeApiResult(call)
     }

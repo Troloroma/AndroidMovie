@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.popularmovies.domain'
+    namespace 'com.example.movie.domain'
     compileSdk 34
 
     defaultConfig {

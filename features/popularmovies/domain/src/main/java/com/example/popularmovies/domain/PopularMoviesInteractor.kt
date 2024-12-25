@@ -1,5 +1,7 @@
 package com.example.popularmovies.domain
 
-interface PopularMoviesInteractor {
+import com.example.common.Entity
 
+interface PopularMoviesInteractor {
+    suspend fun getPopularMovies(page : Int) : Entity<PopularMoviesEntity>
 }

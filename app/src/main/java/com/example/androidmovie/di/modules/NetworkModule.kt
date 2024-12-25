@@ -23,5 +23,5 @@ class NetworkModule {
     @Provides
     fun provideApi(
         provider: ApiProvider
-    ) : Api = provider.provideNetwork(baseUrl = "ApiConst.HOST_API")
+    ) : Api = provider.provideNetwork(baseUrl = ApiConst.HOST_API)
 }
