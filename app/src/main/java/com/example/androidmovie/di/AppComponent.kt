@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import com.example.androidmovie.App
 import com.example.androidmovie.di.modules.DomainModule
 import com.example.androidmovie.di.modules.FeatureDepsModule
+import com.example.movie.presentation.di.MovieDeps
 import com.example.popularmovies.presentation.di.PopularMoviesDeps
 import dagger.BindsInstance
 import dagger.Component
@@ -27,7 +28,8 @@ annotation class AppScope
 
 @AppScope
 interface AppComponent :
-    PopularMoviesDeps{
+    PopularMoviesDeps,
+    MovieDeps {
 
     @Component.Builder
     interface Builder {

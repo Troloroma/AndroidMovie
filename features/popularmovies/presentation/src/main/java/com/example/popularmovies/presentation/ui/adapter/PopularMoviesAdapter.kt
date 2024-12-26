@@ -1,6 +1,5 @@
 package com.example.popularmovies.presentation.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -30,7 +29,7 @@ class PopularMoviesAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieModel: MovieModel) = with(binding) {
             title.text = movieModel.title
-            Picasso.get().load(movieModel.posterPath).into(poster);
+            Picasso.get().load(movieModel.posterPath).into(poster)
             description.text = movieModel.overview
             rating.text = movieModel.voteAverage.toString()
 

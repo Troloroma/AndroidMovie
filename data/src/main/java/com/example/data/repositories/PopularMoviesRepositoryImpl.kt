@@ -1,6 +1,7 @@
 package com.example.data.repositories
 
 import com.example.common.Entity
+import com.example.data.DataConst.LANGUAGE_CONST
 import com.example.data.base.BaseRepository
 import com.example.data.mapper.asDomain
 import com.example.network.network.ApiConst.ACCESS_TOKEN
@@ -18,7 +19,7 @@ class PopularMoviesRepositoryImpl(
             val response = safeApiSuspendResultNoResponse {
                 apiService.getPopularMovies(
                     apiKey = ACCESS_TOKEN,
-                    language = "en-US",
+                    language = LANGUAGE_CONST,
                     page = page
                 )
             }) {

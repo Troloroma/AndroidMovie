@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.popularmovies.presentation'
+    namespace 'com.example.movie.presentation'
     compileSdk 34
 
     buildFeatures {
@@ -17,13 +17,11 @@ android {
         targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -33,7 +31,6 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-
 }
 
 dependencies {
@@ -60,16 +57,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
     implementation "androidx.fragment:fragment-ktx:1.8.5"
 
-    //paging
-    implementation "androidx.paging:paging-runtime:3.3.5"
-
     //picasso
     implementation "com.squareup.picasso:picasso:2.8"
 
     //modules
     implementation project(":core:dependency")
     implementation project(":core:dagger")
-    implementation project(':features:popularmovies:domain')
+    implementation project(':features:movie:domain')
     implementation project(':common')
     implementation project(":core:uiComponent")
     implementation project(":core:navigation")

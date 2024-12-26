@@ -5,5 +5,21 @@
     app:startDestination="@id/navigation_popular_movies">
 
     <include app:graph="@navigation/navigation_popular_movies" />
+    <include app:graph="@navigation/navigation_movie" />
+
+
+    <action
+        android:id="@+id/action_popular_movie_feature"
+        app:destination="@id/navigation_popular_movies">
+    </action>
+
+    <action
+        android:id="@+id/action_movie_feature"
+        app:destination="@id/navigation_movie">
+        <argument
+            android:name="movieId"
+            app:argType="string" />
+    </action>
+
 
 </navigation>

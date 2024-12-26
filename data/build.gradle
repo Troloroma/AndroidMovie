@@ -45,4 +45,5 @@ dependencies {
     implementation project(':network:utils')
     implementation project(':common')
     implementation project(':features:popularmovies:domain')
+    implementation project(':features:movie:domain')
 }
