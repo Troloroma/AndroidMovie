@@ -1,0 +1,35 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+    }
+}
+
+rootProject.name = "AndroidMovie"
+include ':app'
+include ':domain'
+include ':data'
+include ':features'
+include ':network:network'
+include ':network:utils'
+include ':common'
+include ':core:dagger'
+include ':core:dependency'
+include ':core:navigation'
+include ':core:uiComponent'
+include ':features:popularmovies:domain'
+include ':features:popularmovies:presentation'
+include ':features:movie:domain'
+include ':features:movie:presentation'

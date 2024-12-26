@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poster">Movie Poster</string>
+    <string name="rating">Rating: </string>
+    <string name="movie_poster_image">Movie Poster Image</string>
+</resources>
