@@ -1,6 +1,5 @@
 package com.example.popularmovies.presentation.ui.adapter
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.common.Entity
@@ -10,7 +9,6 @@ import com.example.popularmovies.presentation.ui.MovieModel
 class MoviesPagingSource(
     private val interactor: PopularMoviesInteractor
 ) : PagingSource<Int, MovieModel>() {
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
         val page = params.key ?: 1
         return try {
@@ -33,7 +31,9 @@ class MoviesPagingSource(
                         nextKey = if (movies?.isEmpty() == true) null else page + 1
                     )
                 }
-                is Entity.Error -> TODO()
+                is Entity.Error -> {
+                    LoadResult.Error(Throwable("Failed to load movies: ${result.exceptionMessage}"))
+                }
             }
         } catch (e: Exception) {
             LoadResult.Error(e)

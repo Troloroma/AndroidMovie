@@ -2,25 +2,22 @@ package com.example.popularmovies.presentation.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.example.core.dependency.findDependencies
 import com.example.core.navigation.NavigationFlow
 import com.example.core.uicomponent.base.BaseFragment
 import com.example.popularmovies.presentation.R
 import com.example.popularmovies.presentation.databinding.FragmentPopularMoviesBinding
 import com.example.popularmovies.presentation.di.DaggerPopularMoviesComponent
-import com.example.popularmovies.presentation.ui.adapter.MoviesLoadStateAdapter
 import com.example.popularmovies.presentation.ui.adapter.PopularMoviesAdapter
-import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,10 +27,10 @@ class PopularMoviesFragment :
     override val binding by viewBinding(FragmentPopularMoviesBinding::bind)
 
     @Inject
-    lateinit var viewModelFactory: Lazy<PopularMoviesViewModel.Companion.Factory>
+    lateinit var storeFactoryProvider: PopularMoviesStoreFactoryProvider
 
-    private val viewModel: PopularMoviesViewModel by viewModels {
-        viewModelFactory.get()
+    private val popularMoviesStore by lazy {
+        storeFactoryProvider.create().create()
     }
 
     override fun onAttach(context: Context) {
@@ -43,33 +40,34 @@ class PopularMoviesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val moviesAdapter = PopularMoviesAdapter { movieId ->
             navigateTopLvl(NavigationFlow.MovieFlow(movieId.toString()))
         }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = moviesAdapter.withLoadStateFooter(
-                footer = MoviesLoadStateAdapter { moviesAdapter.retry() }
-            )
+            adapter = moviesAdapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.popularMoviesList.collectLatest { pagingData ->
-                    moviesAdapter.submitData(pagingData)
+                popularMoviesStore.states.collectLatest { state ->
+                    moviesAdapter.submitData(state.movies)
                 }
             }
         }
 
         moviesAdapter.addLoadStateListener { loadState ->
-            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-            binding.recyclerView.isVisible = loadState.source.refresh !is LoadState.Loading
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.prepend as? LoadState.Error
-                ?: loadState.source.refresh as? LoadState.Error
-            errorState?.let {
-                Log.e("PagingError", it.error.message.orEmpty())
-            }
+            val isLoading = loadState.refresh is LoadState.Loading
+            binding.progressBar.isVisible = isLoading
+            binding.recyclerView.isVisible = !isLoading
+            val isError = loadState.refresh is LoadState.Error
+            binding.errorTextView.isVisible = isError
+            binding.reloadButton.isVisible = isError
+        }
+
+        binding.reloadButton.setOnClickListener {
+            popularMoviesStore.accept(PopularMoviesStore.Intent.ReloadMovies)
         }
     }
 }

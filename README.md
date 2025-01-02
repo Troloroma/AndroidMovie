@@ -4,7 +4,7 @@
 Android Movie is a mobile application designed to explore popular movies and information about them. Users can view popular, access detailed descriptions and ratings.
 
 ## Architecture
-The application follows the MVVM (Model-View-ViewModel) architecture and Clean Architecture to ensure a clean and maintainable codebase. Key components include:
+The application follows the MVI (Model-View-Intent) architecture and Clean Architecture to ensure a clean and maintainable codebase. Key components include:
 - **Feature/presentation:** XML-based layouts and ViewModels
 - **Feature/domain:** Interactor and Repository interfaces
 - **Domain module:** Implementations of interactors
@@ -20,7 +20,7 @@ The application follows the MVVM (Model-View-ViewModel) architecture and Clean A
 - Dagger2
 - Retrofit2
 - Picasso
-- ViewModel
+- MVIKotlin
 - Coroutines, Flow
 - ViewBindings
 - Pagination3
