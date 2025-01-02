@@ -31,7 +31,7 @@ class PopularMoviesRepositoryImpl(
                 }
             }
             // Todo errors
-            is ResponseStatus.LocalError -> Entity.Error("LocalError")
+            is ResponseStatus.LocalError -> Entity.Error(response.message)
             is ResponseStatus.ServerError -> Entity.Error("ServerError")
         }
     }

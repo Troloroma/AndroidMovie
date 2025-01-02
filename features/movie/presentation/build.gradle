@@ -52,9 +52,11 @@ dependencies {
     // reflection-free flavor
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9"
 
-    //viewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
+    //MVIKotlin
+    implementation "com.arkivanov.mvikotlin:mvikotlin:4.0.0"
+    implementation "com.arkivanov.mvikotlin:mvikotlin-main:4.0.0"
+    implementation "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:4.0.0"
+
     implementation "androidx.fragment:fragment-ktx:1.8.5"
 
     //picasso
